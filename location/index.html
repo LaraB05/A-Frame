@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edifício 3D em Realidade Aumentada</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.8/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body>
+  <a-scene
+    vr-mode-ui="enabled: false"
+    renderer="antialias: true; alpha: true"
+    embedded
+    arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+
+    <!-- Modelo 3D do edifício -->
+    <a-assets>
+      <a-asset-item
+        id="edificio"
+        src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Building/glTF-Binary/Building.glb">
+      </a-asset-item>
+    </a-assets>
+
+    <!-- Edifício colocado numa localização GPS -->
+    <a-entity
+      gps-entity-place="latitude: 51.049; longitude: -0.7229;"
+      position="0 0 0"
+      scale="3 3 3">
+
+      <a-entity
+        gltf-model="#edificio"
+        position="0 0 0"
+        rotation="0 0 0">
+      </a-entity>
+
+    </a-entity>
+
+    <!-- Texto de identificação -->
+    <a-text
+      value="Edificio 3D"
+      color="#ffffff"
+      align="center"
+      scale="10 10 10"
+      position="0 5 0"
+      gps-entity-place="latitude: 51.0491; longitude: -0.723;">
+    </a-text>
+
+    <!-- Câmara com localização GPS -->
+    <a-camera
+      gps-camera="gpsMinDistance: 5"
+      rotation-reader>
+    </a-camera>
+
+  </a-scene>
+</body>
+</html>
